@@ -7,25 +7,31 @@ The application detects hand gestures from a live camera feed and predicts the c
 
 This project captures live video input, detects hand gestures, preprocesses the region of interest, and predicts the corresponding ASL alphabet using a trained deep learning model.
 
-📷 Real-time hand tracking 
+📷 Real-time hand tracking  & Region-of-interest (ROI) extraction
 
-🤖 Transfer Learning with MobileNetV2
+🤖 Image preprocessing aligned with MobileNetV2
 
 🧠 Fast and efficient inference using TensorFlow/Keras
 
 🎯 Single-hand detection and classification
 
-💻 Streamlit-based UI for easy interaction
+💻 Real-time prediction via Streamlit-based UI for easy interaction
 
 ## 🚀 Features
 
 -- Real-time gesture recognition using webcam / IP camera
 
--- Lightweight CNN model for fast inference
+-- Hand detection using CVZone
+
+-- Transfer Learning with MobileNetV2
+
+-- Fine-tuning of pretrained layers
+
+-- Strong data augmentation pipeline
+
+-- Classification of 26 ASL alphabets
 
 -- Clean UI with prediction display
-
--- Robust hand detection using CVZone
 
 -- End-to-end pipeline from detection → preprocessing → prediction
 
@@ -53,21 +59,64 @@ The model is built using transfer learning with MobileNetV2, pre-trained on Imag
 
 👉 This allows:
 
-  General features (edges, textures) → preserved
+  Lower layers → General features (edges, textures) → preserved
 
-  Task-specific features → learned
+  Top 60 layers → Task-specific features → learned
+
+  Also prevents overfitting while adapting to the ASL dataset
 
 
 ## 📊 Dataset Details
 
-Total images: 1750
+Total images: ~1815
 
-Training: 1400
+Training: 1452
 
-Validation: 350
+Validation: 363
 
-Classes: 35 gestures
+Classes: 26 (A–Z)
 
+## 📈 Training Performance :
+
+📌 Initial training → gradual learning from scratch
+
+📌 Fine-tuning → major accuracy improvement
+
+### Final Metrics (approx):
+
+    -> Training Accuracy: ~85%
+    
+    -> Validation Accuracy: ~87–89%
+
+##  Key Observations:
+
+📌 Model learns meaningful gesture features
+
+📌 No severe overfitting
+
+📌 Validation > training → augmentation is effective
+
+## 🖥️ Inference Pipeline
+
+1. Detect hand using CVZone
+
+2. Extract bounding box (ROI)
+   
+3. Resize to (128, 128)
+   
+4. Apply preprocess_input
+   
+5. Predict using the trained model
+
+## 📌 Future Scope :
+
+Real-time ASL sentence translation
+
+Gesture-to-speech conversion
+
+Mobile app deployment
+
+Multi-hand interaction system
 
 ## APP : 
 
